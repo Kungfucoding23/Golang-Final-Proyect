@@ -1,4 +1,4 @@
-package bd
+package db
 
 import (
 	"context" //context tiene que ver con lo relacionado con los contextos o entornos de las BD
@@ -9,11 +9,11 @@ import (
 )
 
 /*MongoCN es el objeto de conexión a la base de datos*/
-var MongoCN = ConectarBD()
+var MongoCN = ConectDB()
 var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
 
-/*ConectarBD es la función que me permite conectar a la base de datos*/
-func ConectarBD() *mongo.Client {
+/*ConectDB es la función que me permite conectar a la base de datos*/
+func ConectDB() *mongo.Client {
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err.Error())
@@ -28,8 +28,8 @@ func ConectarBD() *mongo.Client {
 	return client
 }
 
-/*ChequeoConnection es el ping a la BD*/
-func ChequeoConnection() int {
+/*CheckConnection es el ping a la BD*/
+func CheckConnection() int {
 	err := MongoCN.Ping(context.TODO(), nil)
 	if err != nil {
 		return 0

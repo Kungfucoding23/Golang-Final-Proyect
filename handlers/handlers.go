@@ -6,11 +6,11 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/rs/cors"
+	"github.com/rs/cors" //CORS stands for Cross Origin Resource Sharing
 )
 
-// Manejadores seteo mi puerto, el handler y pongo a escuchar al servidor
-func Manejadores() {
+// Handlers seteo mi puerto, el handler y pongo a escuchar al servidor
+func Handlers() {
 	router := mux.NewRouter()
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

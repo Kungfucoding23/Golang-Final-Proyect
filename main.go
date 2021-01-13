@@ -3,15 +3,15 @@ package main
 import (
 	"log"
 
-	"github.com/Kungfucoding23/Golang-Final-Proyect/bd"
+	"github.com/Kungfucoding23/Golang-Final-Proyect/db"
 	"github.com/Kungfucoding23/Golang-Final-Proyect/handlers"
 )
 
 func main() {
-	if bd.ChequeoConnection() == 0 {
+	if db.CheckConnection() == 0 {
 		log.Fatal("Sin conexión a la BD")
 		return
 	}
-	handlers.Manejadores()
+	handlers.Handlers()
 
 }
