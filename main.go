@@ -8,10 +8,12 @@ import (
 )
 
 func main() {
+	// Si es 0 significa que no se logro la conexion
 	if db.CheckConnection() == 0 {
 		log.Fatal("Sin conexión a la BD")
 		return
 	}
+	// Si se conecta, llamo al manejador que es donde seteo el puerto y se escucha el servidor
 	handlers.Handlers()
 
 }
