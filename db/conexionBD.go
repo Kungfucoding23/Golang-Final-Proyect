@@ -32,7 +32,7 @@ func ConectDB() *mongo.Client {
 		log.Fatal(err.Error())
 		return client
 	}
-	log.Println("Conexión exitosa con la BD")
+	log.Println("Listening...")
 	return client
 }
 
