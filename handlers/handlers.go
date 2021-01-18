@@ -17,6 +17,7 @@ func Handlers() {
 	router := mux.NewRouter()
 	// por cada EndPoint vamos a tener un renglon que permita manejar la funcion correspondiente
 	router.HandleFunc("/registro", middlew.CheckDB(routers.Registro)).Methods("POST")
+	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
