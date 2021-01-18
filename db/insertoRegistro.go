@@ -19,6 +19,7 @@ func InsertoRegistro(u models.Usuario) (string, bool, error) {
 	col := db.Collection("usuarios")
 	u.Password, _ = EncriptarPassword(u.Password)
 	// InsertOne inserta un solo documento en la coleccion
+	// para insertar varios usar InsertMany()
 	result, err := col.InsertOne(ctx, u)
 	if err != nil {
 		return "", false, err
