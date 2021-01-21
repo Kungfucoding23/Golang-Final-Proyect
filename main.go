@@ -20,4 +20,6 @@ func main() {
 
 // CompileDaemon => https://github.com/githubnemo/CompileDaemon
 
+// Run => CompileDaemon -command="Golang-Final-Proyect" para escuchar los cambios
+
 // mas info => https://blog.friendsofgo.tech/posts/driver-oficial-mongodb-golang/
