@@ -3,6 +3,7 @@ package db
 import (
 	"context" //context tiene que ver con lo relacionado con los contextos o entornos de las BD
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -11,13 +12,19 @@ import (
 /*MongoCN es el objeto de conexión a la base de datos*/
 var MongoCN = ConectDB()
 
-// Client crea una nueva instancia de ClientOptions.
-// ClientOptions contiene las opciones para configurar la instancia de Cliente
-// ApplyURI analiza el URI dado y establece las opciones en consecuencia
-var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
+// var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
 
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
+	// Esta es la variable de entorno configuarada en Heroku para ocultar el acceso a la base de datos
+	connectDB := os.Getenv("DB_CONN")
+	if connectDB == "" {
+		connectDB = "mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority" //aca habria que poner una db local xq la idea es que no quede visible esta conexion
+	}
+	// Client crea una nueva instancia de ClientOptions.
+	// ClientOptions contiene las opciones para configurar la instancia de Cliente
+	// ApplyURI analiza el URI dado y establece las opciones en consecuencia
+	clientOptions := options.Client().ApplyURI(connectDB)
 	// Connect crea un nuevo cliente y luego lo inicializa
 	// TODO devuelve un contexto vacío que no es nulo
 	client, err := mongo.Connect(context.TODO(), clientOptions)
