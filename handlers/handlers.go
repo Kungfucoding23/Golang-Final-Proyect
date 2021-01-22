@@ -19,6 +19,7 @@ func Handlers() {
 	router.HandleFunc("/registro", middlew.CheckDB(routers.Registro)).Methods("POST")
 	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
 	router.HandleFunc("/verperfil", middlew.CheckDB(middlew.ValidoJWT(routers.VerPerfil))).Methods("GET")
+	router.HandleFunc("/modificarPerfil", middlew.CheckDB(middlew.ValidoJWT(routers.ModificarPerfil))).Methods("PUT")
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
