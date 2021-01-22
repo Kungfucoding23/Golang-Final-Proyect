@@ -20,6 +20,8 @@ func BuscoPerfil(ID string) (models.Usuario, error) {
 	col := db.Collection("usuarios")
 
 	var perfil models.Usuario
+	// ObjectIDFromHex creates a new ObjectID from a hex string. It returns an error if the hex string is not a
+	// valid ObjectID.
 	objID, _ := primitive.ObjectIDFromHex(ID)
 
 	condicion := bson.M{
@@ -28,7 +30,7 @@ func BuscoPerfil(ID string) (models.Usuario, error) {
 	err := col.FindOne(ctx, condicion).Decode(&perfil)
 	perfil.Password = ""
 	if err != nil {
-		fmt.Println("Registro no encontrado" + err.Error())
+		fmt.Println("Registro no encontrado " + err.Error())
 		return perfil, err
 	}
 	return perfil, nil
