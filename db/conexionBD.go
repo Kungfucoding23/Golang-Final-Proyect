@@ -12,14 +12,12 @@ import (
 /*MongoCN es el objeto de conexión a la base de datos*/
 var MongoCN = ConectDB()
 
-// var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
-
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
 	// Esta es la variable de entorno configuarada en Heroku para ocultar el acceso a la base de datos
 	connectDB := os.Getenv("DB_CONN")
 	if connectDB == "" {
-		connectDB = "mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority" //aca habria que poner una db local xq la idea es que no quede visible esta conexion
+		connectDB = "mongodb://localhost:27017/microblogging" //aca habria que poner una db local xq la idea es que no quede visible esta conexion
 	}
 	// Client crea una nueva instancia de ClientOptions.
 	// ClientOptions contiene las opciones para configurar la instancia de Cliente
