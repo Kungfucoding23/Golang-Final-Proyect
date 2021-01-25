@@ -2,9 +2,10 @@ package db
 
 import (
 	"context" //context tiene que ver con lo relacionado con los contextos o entornos de las BD
+	"fmt"
 	"log"
-	"os"
 
+	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -15,7 +16,28 @@ var MongoCN = ConectDB()
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
 	// Esta es la variable de entorno configuarada en Heroku para ocultar el acceso a la base de datos
-	connectDB := os.Getenv("DB_CONN")
+	// Set the file name of the configurations file
+	viper.SetConfigName("config")
+
+	// Set the path to look for the configurations file
+	viper.AddConfigPath(".")
+
+	// Enable VIPER to read Environment Variables
+	viper.AutomaticEnv()
+
+	viper.SetConfigType("yml")
+
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Printf("Error reading config file, %s", err)
+	}
+	// getting env variables DB_CONN
+	// viper.Get() returns an empty interface{}
+	// so we have to do the type assertion, to get the value
+	connectDB, ok := viper.Get("DB_CONN").(string)
+	if !ok {
+		log.Fatalf("Invalid type assertion")
+	}
+
 	if connectDB == "" {
 		connectDB = "mongodb://localhost:27017/microblogging"
 	}
