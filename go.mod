@@ -1,6 +1,6 @@
 module github.com/Kungfucoding23/Golang-Final-Proyect
 
-go 1.15
+go 1.13
 
 require (
 	github.com/aws/aws-sdk-go v1.36.31 // indirect
