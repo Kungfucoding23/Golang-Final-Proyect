@@ -15,14 +15,11 @@ var MongoCN = ConectDB()
 
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
-	// Esta es la variable de entorno configuarada en Heroku para ocultar el acceso a la base de datos
-	// Set the file name of the configurations file
+
 	viper.SetConfigName("config")
 
-	// Set the path to look for the configurations file
 	viper.AddConfigPath(".")
 
-	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
 
 	viper.SetConfigType("yml")
@@ -30,9 +27,6 @@ func ConectDB() *mongo.Client {
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
 	}
-	// getting env variables DB_CONN
-	// viper.Get() returns an empty interface{}
-	// so we have to do the type assertion, to get the value
 	connectDB, ok := viper.Get("DB_CONN").(string)
 	if !ok {
 		log.Fatalf("Invalid type assertion")
