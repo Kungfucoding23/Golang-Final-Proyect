@@ -17,7 +17,7 @@ func ConectDB() *mongo.Client {
 	// Esta es la variable de entorno configuarada en Heroku para ocultar el acceso a la base de datos
 	connectDB := os.Getenv("DB_CONN")
 	if connectDB == "" {
-		connectDB = "mongodb://localhost:27017/microblogging" //aca habria que poner una db local xq la idea es que no quede visible esta conexion
+		connectDB = "mongodb://localhost:27017/microblogging"
 	}
 	// Client crea una nueva instancia de ClientOptions.
 	// ClientOptions contiene las opciones para configurar la instancia de Cliente
