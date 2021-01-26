@@ -21,6 +21,8 @@ func Handlers() {
 	router.HandleFunc("/verperfil", middlew.CheckDB(middlew.ValidoJWT(routers.VerPerfil))).Methods("GET")
 	router.HandleFunc("/modificarperfil", middlew.CheckDB(middlew.ValidoJWT(routers.ModificarPerfil))).Methods("PUT")
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidoJWT(routers.GraboTweet))).Methods("POST")
+	router.HandleFunc("/leertweet", middlew.CheckDB(middlew.ValidoJWT(routers.LeerTweet))).Methods("GET")
+	router.HandleFunc("/borrartweet", middlew.CheckDB(middlew.ValidoJWT(routers.BorrarTweet))).Methods("DELETE")
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	// Si el valor de la variable de entorno de heroku es vacio se le asigna el puerto 8080
 	PORT := os.Getenv("PORT")

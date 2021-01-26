@@ -10,7 +10,8 @@ import (
 
 // ChequeoYaExisteUsuario recibe un email de parámetro y chequea si ya esta en la db
 func ChequeoYaExisteUsuario(email string) (models.Usuario, bool, string) {
-	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
 	db := MongoCN.Database("microblogging")
 	col := db.Collection("usuarios")
 	condicion := bson.M{"email": email}
