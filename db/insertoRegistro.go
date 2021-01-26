@@ -3,9 +3,9 @@ package db
 import (
 	"time"
 
+	"context"
 	"github.com/Kungfucoding23/Golang-Final-Proyect/models"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"golang.org/x/net/context"
 )
 
 // InsertoRegistro es la parada final con la BD para insertar los datos del ususario
