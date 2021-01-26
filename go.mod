@@ -1,5 +1,6 @@
 module github.com/Kungfucoding23/Golang-Final-Proyect
 
+// +heroku goVersion go1.15
 go 1.15
 
 require (
