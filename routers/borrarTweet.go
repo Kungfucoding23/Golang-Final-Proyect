@@ -1,48 +1,38 @@
 package routers
 
 import (
-	"context"
-	"encoding/json"
-	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/Kungfucoding23/Golang-Final-Proyect/db"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
-
-var connection = db.MongoCN
 
 // BorrarTweet borra un tweet por su ID
 func BorrarTweet(w http.ResponseWriter, r *http.Request) {
-	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
-	defer cancel()
 
 	ID := r.URL.Query().Get("id")
 	if len(ID) < 1 {
 		http.Error(w, "Debe enviar el parámetro ID", http.StatusBadRequest)
 		return
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 
-	db := connection.Database("microblogging")
-	col := db.Collection("tweet")
+	err := db.BorroTweetDB(ID, IDUsuario)
 
-	objID, _ := primitive.ObjectIDFromHex(ID)
-
-	condicion := bson.M{
-		"_id": objID,
-	}
-
-	deleteResult, err := col.DeleteOne(ctx, condicion)
+	// if !tweetBorrado {
+	// 	// fmt.Fprintf(w, "El tweet que desea borrar no existe")
+	// 	//la deje comentada xq me daba una advertencia:
+	// 	//http: superfluous response.WriteHeader call from github.com/Kungfucoding23/Golang-Final-Proyect/routers.BorrarTweet (borrarTweet.go:31)
+	// }
 
 	if err != nil {
-		fmt.Println("Registro no encontrado " + err.Error())
+		http.Error(w, "Ocurrió un error al intentar borrar el tweet: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
 
-	json.NewEncoder(w).Encode(deleteResult)
+	//Si llego hasta aca, ya se borro el tweet
+	w.WriteHeader(http.StatusOK)
+
+	// json.NewEncoder(w).Encode(deleteResult)
 }
+
+//antes de separar el borrarTweet en dos archivos no me daba la advertencia, tengo que revisar porque
