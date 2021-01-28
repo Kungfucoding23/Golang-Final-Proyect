@@ -23,6 +23,18 @@ func Handlers() {
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidoJWT(routers.GraboTweet))).Methods("POST")
 	router.HandleFunc("/leertweet", middlew.CheckDB(middlew.ValidoJWT(routers.LeerTweet))).Methods("GET")
 	router.HandleFunc("/borrartweet", middlew.CheckDB(middlew.ValidoJWT(routers.BorrarTweet))).Methods("DELETE")
+	/*
+		Rutas imagenes
+		Nota: para obtener tanto avatar como banner no es necesario validar el Token ya que es algo que voy a
+		querer mostrar sin necesidad de que el usuario este logueado.
+
+		Se puede obtener la imagen en postman y la puede mostrar
+	*/
+	router.HandleFunc("/subiravatar", middlew.CheckDB(middlew.ValidoJWT(routers.SubirAvatar))).Methods("POST")
+	router.HandleFunc("/obteneravatar", middlew.CheckDB(routers.ObtenerAvatar)).Methods("GET")
+	router.HandleFunc("/subirbanner", middlew.CheckDB(middlew.ValidoJWT(routers.SubirBanner))).Methods("POST")
+	router.HandleFunc("/obtenerbanner", middlew.CheckDB(routers.ObtenerBanner)).Methods("GET")
+
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	// Si el valor de la variable de entorno de heroku es vacio se le asigna el puerto 8080
 	PORT := os.Getenv("PORT")
