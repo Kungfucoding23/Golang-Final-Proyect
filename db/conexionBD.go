@@ -18,6 +18,15 @@ var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangf
 
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
+
+	// // De esta forma se conecta a la base de datos usando la variable de heroku "DB_CNN"
+	// CNN := os.Getenv("DB_CNN")
+	// if CNN  == "" {
+	// 	CNN = "mongodb://localhost:27017/microblogging"
+	// }
+
+	// clientOptions := options.Client().ApplyURI(CNN)
+
 	// Connect crea un nuevo cliente y luego lo inicializa
 	// TODO devuelve un contexto vacío que no es nulo
 	client, err := mongo.Connect(context.TODO(), clientOptions)
