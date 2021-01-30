@@ -34,6 +34,7 @@ func Handlers() {
 	router.HandleFunc("/obtenerbanner", middlew.CheckDB(routers.ObtenerBanner)).Methods("GET")
 
 	//Relaciones
+	//Alta
 	router.HandleFunc("/altarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.AltaRelacion))).Methods("POST")
 	//Borrar relación
 	router.HandleFunc("/bajarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.BajaRelacion))).Methods("DELETE")
