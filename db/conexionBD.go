@@ -15,7 +15,7 @@ var MongoCN = ConectDB()
 // Client crea una nueva instancia de ClientOptions.
 // ClientOptions contiene las opciones para configurar la instancia de Cliente
 // ApplyURI analiza el URI dado y establece las opciones en consecuencia
-// var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
+// var clientOptions = options.Client().ApplyURI("")
 
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
