@@ -3,6 +3,7 @@ package db
 import (
 	"context" //context tiene que ver con lo relacionado con los contextos o entornos de las BD
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -14,18 +15,18 @@ var MongoCN = ConectDB()
 // Client crea una nueva instancia de ClientOptions.
 // ClientOptions contiene las opciones para configurar la instancia de Cliente
 // ApplyURI analiza el URI dado y establece las opciones en consecuencia
-var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
+// var clientOptions = options.Client().ApplyURI("mongodb+srv://ale:ale1402@golangfinalproyect.cl5zb.mongodb.net/microblogging?retryWrites=true&w=majority")
 
 /*ConectDB es la función que me permite conectar a la base de datos*/
 func ConectDB() *mongo.Client {
 
-	// // De esta forma se conecta a la base de datos usando la variable de heroku "DB_CNN"
-	// CNN := os.Getenv("DB_CNN")
-	// if CNN  == "" {
-	// 	CNN = "mongodb://localhost:27017/microblogging"
-	// }
+	// De esta forma se conecta a la base de datos usando la variable de heroku "DB_CNN"
+	CNN := os.Getenv("DB_CONN")
+	if CNN == "" {
+		CNN = "mongodb://localhost:27017/microblogging"
+	}
 
-	// clientOptions := options.Client().ApplyURI(CNN)
+	clientOptions := options.Client().ApplyURI(CNN)
 
 	// Connect crea un nuevo cliente y luego lo inicializa
 	// TODO devuelve un contexto vacío que no es nulo
