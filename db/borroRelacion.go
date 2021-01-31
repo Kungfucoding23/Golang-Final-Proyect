@@ -7,6 +7,7 @@ import (
 	"github.com/Kungfucoding23/Golang-Final-Proyect/models"
 )
 
+//BorroRel borra una relacion
 func BorroRel(rel models.Relacion) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
