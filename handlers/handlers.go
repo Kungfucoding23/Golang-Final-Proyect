@@ -37,6 +37,8 @@ func Handlers() {
 	router.HandleFunc("/altarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.AltaRelacion))).Methods("POST")
 	//Borrar relación
 	router.HandleFunc("/bajarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.BajaRelacion))).Methods("DELETE")
+	//Consulta relación
+	router.HandleFunc("/consultarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.ConsultaRelacion))).Methods("GET")
 
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	// Si el valor de la variable de entorno de heroku es vacio se le asigna el puerto 8080

@@ -7,6 +7,7 @@ import (
 	"github.com/Kungfucoding23/Golang-Final-Proyect/models"
 )
 
+//BajaRelacion borra la relacion
 func BajaRelacion(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query().Get("id")
 
