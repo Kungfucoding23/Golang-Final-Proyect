@@ -17,6 +17,7 @@ func ConsultaRelacion(w http.ResponseWriter, r *http.Request) {
 	rel.UsuarioID = IDUsuario
 	rel.UsuarioRelacionID = ID
 
+	//Variable resp donde voy a guardar la respuesta si hay relacion o no
 	var resp models.RespuestaConsultaRelacion
 
 	status, err := db.ConsultoRelacion(rel)
