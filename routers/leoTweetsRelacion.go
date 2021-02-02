@@ -22,7 +22,7 @@ func LeoTweetsRelacion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respuesta, correcto := db.LeoTweetsSeguidores(IDUsuario, page)
+	respuesta, correcto := db.LeoTweetsSeguidos(IDUsuario, page)
 	if !correcto {
 		http.Error(w, "Error al leer los tweets", http.StatusBadRequest)
 		return
