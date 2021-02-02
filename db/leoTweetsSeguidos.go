@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-//LeoTweetsSeguidores lee los tweets de mis seguidores
+//LeoTweetsSeguidos lee los tweets de mis seguidores
 func LeoTweetsSeguidos(ID string, page int) ([]models.DevuelvoTweetsSeguidores, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
