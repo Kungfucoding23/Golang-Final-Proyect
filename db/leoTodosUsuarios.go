@@ -23,7 +23,7 @@ func LeoTodosUsuarios(ID string, page int64, search string, tipo string) ([]*mod
 	db := MongoCN.Database("microblogging")
 	col := db.Collection("usuarios")
 
-	//creamos la variable para el resultado, el slice de usuarios
+	//creamos la variable para el resultado, que va a ser un slice de usuarios
 	var results []*models.Usuario
 
 	findOptions := options.Find()
@@ -55,9 +55,9 @@ func LeoTodosUsuarios(ID string, page int64, search string, tipo string) ([]*mod
 	for cur.Next(ctx) {
 
 		//defino un usuario para trabajar con el elemento que puedo después incluir en results
-		var user models.Usuario
+		var s models.Usuario
 		//grabamos lo del cursor en el modelo de usuario para leer los campos
-		err := cur.Decode(&user)
+		err := cur.Decode(&s)
 		if err != nil {
 			//encontró un error
 			fmt.Println(err.Error())
@@ -65,14 +65,14 @@ func LeoTodosUsuarios(ID string, page int64, search string, tipo string) ([]*mod
 		}
 
 		//creo una variable relacion para consultar sobre la relacion con el usuario
-		var relacion models.Relacion
-		relacion.UsuarioID = ID
-		relacion.UsuarioRelacionID = user.ID.Hex()
+		var r models.Relacion
+		r.UsuarioID = ID
+		r.UsuarioRelacionID = s.ID.Hex()
 
 		//por cada iteracion tengo que ver si al usuario lo debo incluir o no en el resultado
 		incluir = false
 
-		encontrado, err = ConsultoRelacion(relacion)
+		encontrado, err = ConsultoRelacion(r)
 
 		if tipo == "new" && encontrado == false {
 			//lo tengo que incluir en la lista, porque no lo encontró en la relación
@@ -82,22 +82,22 @@ func LeoTodosUsuarios(ID string, page int64, search string, tipo string) ([]*mod
 		if tipo == "follow" && encontrado == true {
 			incluir = true
 		}
-		if relacion.UsuarioRelacionID == ID {
+		if r.UsuarioRelacionID == ID {
 			//sería el caso de que me estoy siguiendo a mí mismo
 			incluir = false
 		}
 		if incluir == true {
 			//hago un blanqueo de los campos que no me interesa incluir
 			//solo quiero el avatar, el nombre, los apellidos y la fecha de nacimiento
-			user.Password = ""
-			user.Biografia = ""
-			user.SitioWeb = ""
-			user.Ubicacion = ""
-			user.Banner = ""
-			user.Email = ""
+			s.Password = ""
+			s.Biografia = ""
+			s.SitioWeb = ""
+			s.Ubicacion = ""
+			s.Banner = ""
+			s.Email = ""
 
 			//agrego con append el modelo de usuario s en results
-			results = append(results, &user)
+			results = append(results, &s)
 		}
 	}
 

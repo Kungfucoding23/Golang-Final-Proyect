@@ -21,28 +21,28 @@ func Handlers() {
 	router.HandleFunc("/verperfil", middlew.CheckDB(middlew.ValidoJWT(routers.VerPerfil))).Methods("GET")
 	router.HandleFunc("/modificarperfil", middlew.CheckDB(middlew.ValidoJWT(routers.ModificarPerfil))).Methods("PUT")
 	router.HandleFunc("/tweet", middlew.CheckDB(middlew.ValidoJWT(routers.GraboTweet))).Methods("POST")
-	router.HandleFunc("/leertweet", middlew.CheckDB(middlew.ValidoJWT(routers.LeerTweet))).Methods("GET")
-	router.HandleFunc("/borrartweet", middlew.CheckDB(middlew.ValidoJWT(routers.BorrarTweet))).Methods("DELETE")
+	router.HandleFunc("/leoTweets", middlew.CheckDB(middlew.ValidoJWT(routers.LeerTweet))).Methods("GET")
+	router.HandleFunc("/eliminarTweet", middlew.CheckDB(middlew.ValidoJWT(routers.BorrarTweet))).Methods("DELETE")
 	/*
 		Rutas imagenes
 		Nota: para obtener tanto avatar como banner no es necesario validar el Token ya que es algo que voy a
 		querer mostrar sin necesidad de que el usuario este logueado.
 	*/
-	router.HandleFunc("/subiravatar", middlew.CheckDB(middlew.ValidoJWT(routers.SubirAvatar))).Methods("POST")
-	router.HandleFunc("/obteneravatar", middlew.CheckDB(routers.ObtenerAvatar)).Methods("GET")
-	router.HandleFunc("/subirbanner", middlew.CheckDB(middlew.ValidoJWT(routers.SubirBanner))).Methods("POST")
-	router.HandleFunc("/obtenerbanner", middlew.CheckDB(routers.ObtenerBanner)).Methods("GET")
+	router.HandleFunc("/subirAvatar", middlew.CheckDB(middlew.ValidoJWT(routers.SubirAvatar))).Methods("POST")
+	router.HandleFunc("/obtenerAvatar", middlew.CheckDB(routers.ObtenerAvatar)).Methods("GET")
+	router.HandleFunc("/subirBanner", middlew.CheckDB(middlew.ValidoJWT(routers.SubirBanner))).Methods("POST")
+	router.HandleFunc("/obtenerBanner", middlew.CheckDB(routers.ObtenerBanner)).Methods("GET")
 
 	//Alta relacion
-	router.HandleFunc("/altarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.AltaRelacion))).Methods("POST")
+	router.HandleFunc("/altaRelacion", middlew.CheckDB(middlew.ValidoJWT(routers.AltaRelacion))).Methods("POST")
 	//Borrar relación
-	router.HandleFunc("/bajarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.BajaRelacion))).Methods("DELETE")
+	router.HandleFunc("/bajaRelacion", middlew.CheckDB(middlew.ValidoJWT(routers.BajaRelacion))).Methods("DELETE")
 	//Consulta relación
-	router.HandleFunc("/consultarelacion", middlew.CheckDB(middlew.ValidoJWT(routers.ConsultaRelacion))).Methods("GET")
+	router.HandleFunc("/consultaRelacion", middlew.CheckDB(middlew.ValidoJWT(routers.ConsultaRelacion))).Methods("GET")
 
-	router.HandleFunc("/listausuarios", middlew.CheckDB(middlew.ValidoJWT(routers.ListaUsuarios))).Methods("GET")
+	router.HandleFunc("/listaRsuarios", middlew.CheckDB(middlew.ValidoJWT(routers.ListaUsuarios))).Methods("GET")
 
-	router.HandleFunc("/leotweetsseguidores", middlew.CheckDB(middlew.ValidoJWT(routers.LeoTweetsRelacion))).Methods("GET")
+	router.HandleFunc("/leoTweetsSeguidores", middlew.CheckDB(middlew.ValidoJWT(routers.LeoTweetsRelacion))).Methods("GET")
 
 	// Getenv recupera el valor de la variable de entorno nombrada por la clave.
 	// Si el valor de la variable de entorno de heroku es vacio se le asigna el puerto 8080
