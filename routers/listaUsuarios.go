@@ -37,7 +37,7 @@ func ListaUsuarios(w http.ResponseWriter, r *http.Request) {
 	//viene todo bien
 
 	// establecemos el tipo de Header
-	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 	// le damos un status created
 	w.WriteHeader(http.StatusCreated)
 	// le devolvemos la lista de resultados al navegador
