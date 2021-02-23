@@ -1,25 +1,18 @@
-# golang base image
-FROM golang
-
-# create dir
-RUN mkdir /app
-
-WORKDIR /app
-
-#copy go mod and sum files
-COPY go.mod go.sum ./
-
-#Download all dependencies. Dependencies will be cached if the go.mod and the go.sum files are not changed
+FROM golang:latest AS builder
+RUN apt-get update
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+WORKDIR /go/src/github.com/Kungfucoding23/Golang-Final-Proyect
+COPY go.mod .
 RUN go mod download
-
-#Copy the source from the current directory to the working Directory inside the container 
 COPY . .
+RUN go install
 
-#Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+FROM scratch
+COPY --from=builder /go/bin/github.com/Kungfucoding23/Golang-Final-Proyect .
+ENTRYPOINT ["./main"]
 
-#Command to run the executable
-CMD ["./main"]
-
-# Expose port 8080 to the outside world
-EXPOSE 8080
+#CMD ["./main"]
+# docker build -t myapp . 
